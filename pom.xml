@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <camunda.version>8.8.0</camunda.version>
+        <camunda.version>8.8.16</camunda.version>
         <junit.jupiter.version>5.12.2</junit.jupiter.version>
     </properties>
 
@@ -68,12 +68,6 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-    
-      <dependency>
-        <groupId>io.camunda</groupId>
-        <artifactId>camunda-process-test-java</artifactId>
-        <version>8.8.0</version>
-      </dependency>
     </dependencies>
 
     <build>
