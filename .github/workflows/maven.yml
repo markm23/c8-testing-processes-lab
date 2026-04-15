@@ -30,7 +30,7 @@ jobs:
     # - name: Build with Maven
     #   run: mvn -B package --file pom.xml
     - name: Test with Maven
-      run: mvn test -DTest=BPMNTestsSingleton
+      run: mvn test -DTest=BPMNTestsSharedContainers
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     # - name: Update dependency graph
