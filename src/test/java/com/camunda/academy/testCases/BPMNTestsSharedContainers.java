@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Nested;
 import io.camunda.process.test.api.CamundaProcessTest;
 
 @CamundaProcessTest
-public class BPMNTestsSingleton {
+public class BPMNTestsSharedContainers {
 
     // private CamundaClient client;
     // private CamundaProcessTestContext processTestContext;
