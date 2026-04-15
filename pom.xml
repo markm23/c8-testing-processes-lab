@@ -71,14 +71,14 @@
     </dependencies>
 
     <build>
-        <plugins>
+        <!-- <plugins> -->
             <!-- ensure Surefire has JUnit 5 support and compatible classloading -->
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
-            </plugin>
+            <!-- <plugin> -->
+                <!-- <artifactId>maven-surefire-plugin</artifactId> -->
+                <!-- <version>3.1.2</version> -->
+            <!-- </plugin> -->
             <!-- keep other configured plugins as-is -->
-        </plugins>
+        <!-- </plugins> -->
 
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>

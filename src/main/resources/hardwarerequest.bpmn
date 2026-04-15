@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="040cb24" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0" camunda:diagramRelationId="2035b97f-f177-47e2-a447-6dd5ef704a0d">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.44.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0" camunda:diagramRelationId="2035b97f-f177-47e2-a447-6dd5ef704a0d">
   <bpmn:process id="HardwareRequestProcess" name="Hardware Request Process" isExecutable="true">
     <bpmn:startEvent id="StartEvent_HardwareRequired" name="New Hardware required">
       <bpmn:extensionElements>
@@ -199,9 +199,6 @@
       <bpmndi:BPMNShape id="Activity_1ogkmec_di" bpmnElement="ServiceTask_OrderHardware">
         <dc:Bounds x="710" y="230" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0xj6kw4_di" bpmnElement="Gateway_0xj6kw4" isMarkerVisible="true">
-        <dc:Bounds x="1105" y="145" width="50" height="50" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1shjiv9_di" bpmnElement="EndEvent_HardwareSent">
         <dc:Bounds x="1402" y="152" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -260,6 +257,9 @@
         <dc:Bounds x="1060" y="280" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0xj6kw4_di" bpmnElement="Gateway_0xj6kw4" isMarkerVisible="true">
+        <dc:Bounds x="1105" y="145" width="50" height="50" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_19zb2iv_di" bpmnElement="Event_HardwareStolen">
         <dc:Bounds x="1212" y="192" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -282,7 +282,7 @@
         <di:waypoint x="695" y="170" />
         <di:waypoint x="1105" y="170" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="710" y="152" width="18" height="14" />
+          <dc:Bounds x="712" y="152" width="17" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1xlm435_di" bpmnElement="HardwareNotAvailableFlow">
