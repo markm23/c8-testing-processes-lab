@@ -10,27 +10,34 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "initial" ]
+    branches: ["initial"]
   pull_request:
-    branches: [ "initial" ]
+    branches: ["initial"]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-        cache: maven
-    # - name: Build with Maven
-    #   run: mvn -B package --file pom.xml
-    - name: Test with Maven
-      run: mvn test -DTest=PaymentProcessRealHostedTest
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: maven
+      # - name: Build with Maven
+      #   run: mvn -B package --file pom.xml
+      - name: Test with Maven
+        run: mvn test -DTest=PaymentProcessRealHostedTest
+        env:
+          CAMUNDA_REST_ADDRESS: ${{ vars.CAMUNDA_REST_ADDRESS }}
+          CAMUNDA_GRPC_ADDRESS: ${{ vars.CAMUNDA_GRPC_ADDRESS }}
+          CAMUNDA_AUTHORIZATION_SERVER_URL: ${{ vars.CAMUNDA_AUTHORIZATION_SERVER_URL }}
+          CAMUNDA_TOKEN_AUDIENCE: ${{ vars.CAMUNDA_TOKEN_AUDIENCE }}
+          CAMUNDA_CLIENT_ID: ${{ secrets.CAMUNDA_CLIENT_ID }}
+          CAMUNDA_CLIENT_SECRET: ${{ secrets.CAMUNDA_CLIENT_SECRET }}
+          CAMUNDA_MONITORING_API_ADDRESS: ${{ vars.CAMUNDA_MONITORING_API_ADDRESS }}
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     # - name: Update dependency graph

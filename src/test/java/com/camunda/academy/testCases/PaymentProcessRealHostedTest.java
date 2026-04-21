@@ -36,9 +36,9 @@ public class PaymentProcessRealHostedTest {
                                                         .clientId(System.getenv("CAMUNDA_CLIENT_ID"))
                                                         .clientSecret(System.getenv("CAMUNDA_CLIENT_SECRET"))
                                                         .build()))
-                        .withConnectorsEnabled(false)
-                        .withRemoteCamundaMonitoringApiAddress(URI.create(System
-                                        .getenv("CAMUNDA_MONITORING_API_ADDRESS")));
+                        .withConnectorsEnabled(false);
+                        // .withRemoteCamundaMonitoringApiAddress(URI.create(System
+                        //                 .getenv("CAMUNDA_MONITORING_API_ADDRESS")));
         // .withRemoteConnectorsRestApiAddress(URI.create(System
         // .getenv("CAMUNDA_CONNECTORS_REST_API_ADDRESS")));
         // Change the connection timeout (default: PT1M)
