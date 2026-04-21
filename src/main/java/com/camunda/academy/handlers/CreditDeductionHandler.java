@@ -1,13 +1,15 @@
 package com.camunda.academy.handlers;
 
-import com.camunda.academy.services.CustomerService;
-import io.camunda.client.api.response.ActivatedJob;
-import io.camunda.client.api.worker.JobClient;
 import java.util.Map;
 
-import io.camunda.client.api.worker.JobHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.camunda.academy.services.CustomerService;
+
+import io.camunda.client.api.response.ActivatedJob;
+import io.camunda.client.api.worker.JobClient;
+import io.camunda.client.api.worker.JobHandler;
 
 public class CreditDeductionHandler implements JobHandler {
 
@@ -25,6 +27,7 @@ public class CreditDeductionHandler implements JobHandler {
 
     @Override
     public void handle(JobClient client, ActivatedJob job) {
+        System.out.println("Handling job: " + job.getKey() + " of type: " + job.getType());
         LOGGER.info("Task definition type: " + job.getType());
 
         Map<String, Object> variables = job.getVariablesAsMap();

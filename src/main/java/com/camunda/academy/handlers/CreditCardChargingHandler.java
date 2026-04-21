@@ -1,14 +1,16 @@
 package com.camunda.academy.handlers;
 
-import com.camunda.academy.exceptions.InvalidCreditCardException;
-import com.camunda.academy.services.CreditCardService;
-import io.camunda.client.api.response.ActivatedJob;
-import io.camunda.client.api.worker.JobClient;
-import io.camunda.client.api.worker.JobHandler;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Map;
+import com.camunda.academy.exceptions.InvalidCreditCardException;
+import com.camunda.academy.services.CreditCardService;
+
+import io.camunda.client.api.response.ActivatedJob;
+import io.camunda.client.api.worker.JobClient;
+import io.camunda.client.api.worker.JobHandler;
 
 public class CreditCardChargingHandler implements JobHandler {
 
@@ -26,6 +28,7 @@ public class CreditCardChargingHandler implements JobHandler {
 
   @Override
   public void handle(JobClient client, ActivatedJob job) {
+    System.out.println("Handling job: " + job.getKey() + " of type: " + job.getType());
     LOGGER.info("Task definition type: " + job.getType());
 
     Map<String, Object> variables = job.getVariablesAsMap();
@@ -37,16 +40,16 @@ public class CreditCardChargingHandler implements JobHandler {
     try {
       creditCardService.chargeAmount(cardNumber, cvc, expiryDate, openAmount);
       client.newCompleteCommand(job)
-              .send().exceptionally(throwable -> {
-                throw new RuntimeException("Could not complete job " + job, throwable);
-              });
+          .send().exceptionally(throwable -> {
+            throw new RuntimeException("Could not complete job " + job, throwable);
+          });
     } catch (InvalidCreditCardException e) {
       client.newFailCommand(job)
-              .retries(0)
-              .errorMessage("Invalid expiry date: " + expiryDate)
-              .send().exceptionally(throwable -> {
-                throw new RuntimeException("Could not fail job " + job, throwable);
-              });
+          .retries(0)
+          .errorMessage("Invalid expiry date: " + expiryDate)
+          .send().exceptionally(throwable -> {
+            throw new RuntimeException("Could not fail job " + job, throwable);
+          });
     }
   }
 }

@@ -22,7 +22,7 @@ public class PaymentApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(PaymentApplication.class);
 
-    //Zeebe Client Credentials
+    // Zeebe Client Credentials
     private static final String CAMUNDA_PROPERTIES_PATH = "src/main/resources/application.properties";
     private static String CAMUNDA_AUTHORIZATION_SERVER_URL;
     private static String CAMUNDA_CLIENT_ID;
@@ -31,41 +31,42 @@ public class PaymentApplication {
     private static String CAMUNDA_REST_ADDRESS;
     private static String CAMUNDA_GRPC_ADDRESS;
 
-    //Payment Application Details
+    // Payment Application Details
     private static final int WORKER_TIMEOUT = 10;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         loadProperties();
         final OAuthCredentialsProvider credentialsProvider = new OAuthCredentialsProviderBuilder()
-            .authorizationServerUrl(CAMUNDA_AUTHORIZATION_SERVER_URL)
-            .audience(CAMUNDA_TOKEN_AUDIENCE)
-            .clientId(CAMUNDA_CLIENT_ID)
-            .clientSecret(CAMUNDA_CLIENT_SECRET)
-            .build();
+                .authorizationServerUrl(CAMUNDA_AUTHORIZATION_SERVER_URL)
+                .audience(CAMUNDA_TOKEN_AUDIENCE)
+                .clientId(CAMUNDA_CLIENT_ID)
+                .clientSecret(CAMUNDA_CLIENT_SECRET)
+                .build();
 
-        try (final CamundaClient  client = CamundaClient.newClientBuilder()
+        System.out.println("Starting Camunda Client with configuration");
+
+        try (final CamundaClient client = CamundaClient.newClientBuilder()
                 .grpcAddress(URI.create(CAMUNDA_GRPC_ADDRESS))
                 .restAddress(URI.create(CAMUNDA_REST_ADDRESS))
                 .credentialsProvider(credentialsProvider)
-                 .build()) {
+                .build()) {
+            System.out.println("Camunda Client started successfully");
 
-            //Start the Credit Deduction Worker
-            final JobWorker creditDeductionWorker =
-                client.newWorker()
+            // Start the Credit Deduction Worker
+            final JobWorker creditDeductionWorker = client.newWorker()
                     .jobType("credit-deduction")
                     .handler(new CreditDeductionHandler())
                     .timeout(Duration.ofSeconds(WORKER_TIMEOUT).toMillis())
                     .open();
 
-            //Start the Credit Deduction Worker
-            final JobWorker creditCardChargingWorker =
-                client.newWorker()
+            // Start the Credit Deduction Worker
+            final JobWorker creditCardChargingWorker = client.newWorker()
                     .jobType("credit-card-charging")
                     .handler(new CreditCardChargingHandler())
                     .timeout(Duration.ofSeconds(WORKER_TIMEOUT).toMillis())
                     .open();
 
-            //Wait for the Workers
+            // Wait for the Workers
             Scanner sc = new Scanner(System.in);
             sc.nextInt();
             sc.close();
@@ -87,7 +88,6 @@ public class PaymentApplication {
             CAMUNDA_REST_ADDRESS = properties.getProperty("CAMUNDA_REST_ADDRESS");
             CAMUNDA_GRPC_ADDRESS = properties.getProperty("CAMUNDA_GRPC_ADDRESS");
             CAMUNDA_TOKEN_AUDIENCE = properties.getProperty("CAMUNDA_TOKEN_AUDIENCE");
-        
         } catch (IOException e) {
             e.printStackTrace();
         }
